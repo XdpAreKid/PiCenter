@@ -1,0 +1,181 @@
+{% extends "base-user.html" %}
+
+{% block css%}    
+
+{% endblock %}
+
+{% block js%}    
+
+{% endblock %}
+
+{% block on_ready%}    
+<script type="text/javascript">
+$(function() {
+    //SLIMSCROLL FOR CHAT WIDGET
+    $('#log-box').slimScroll({
+    	height: $('#box-info').outerHeight(),
+    });
+    // $('#cpp-box').slimScroll({
+    // 	height: '320px'
+    // });
+
+ //    $('#pihome-btn').click(
+	// 	function(){
+	// 		$('#pihome-box').css('display', "block");
+	//  		$('#cpp-box').css('display', "none");
+	// });
+ //    $('#cpp-btn').click(
+	// 	function(){
+	// 		$('#pihome-box').css('display', "none");
+	// 		$('#cpp-box').css('display', "block");    		
+	// });
+
+});
+</script>
+{% endblock %}
+
+{% block content %} 
+<!-- Small boxes (Stat box) -->
+<div class="row">
+	<div class="col-md-3 col-xs-6">
+		<div class="small-box bg-blue">
+			<div class="inner">
+				<h3>
+					{{connection}}
+				</h3>
+				<p>
+					Client Connection
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-road"></i>
+			</div>
+			<a href="{% url 'PiApp.views.settings_general_view' %}" class="small-box-footer">
+				More info <i class="fa fa-arrow-circle-right"></i>
+			</a>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-6">
+		<div class="small-box bg-aqua">
+			<div class="inner">
+				<h3>
+					{{connection}}
+				</h3>
+				<p>
+					Host
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-tasks"></i>
+			</div>
+			<a href="{% url 'PiApp.views.status_default_view' %}" class="small-box-footer">
+				More info <i class="fa fa-arrow-circle-right"></i>
+			</a>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-6">
+		<div class="small-box bg-green">
+			<div class="inner">
+				<h3>
+					{{device_count}}
+				</h3>
+				<p>
+					Device
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-hdd-o"></i>
+			</div>
+			<a href="{% url 'PiApp.views.manage_device_view' %}" class="small-box-footer">
+				More info <i class="fa fa-arrow-circle-right"></i>
+			</a>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-6">
+		<div class="small-box bg-red">
+			<div class="inner">
+				<h3>
+					{{app_num}}
+				</h3>
+				<p>
+					Application
+				</p>
+			</div>
+			<div class="icon">
+				<i class="fa fa-rocket"></i>
+			</div>
+			<a class="small-box-footer">
+				&nbsp
+			</a>
+		</div>
+	</div>
+
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<div class="box box-solid">
+			<div class="box-header" >
+				<i class="fa fa-star"></i>
+				<h3 class="box-title">BoxInfo</h3>
+			</div>
+			<div class="box-body" id="box-info">
+				<table class="table table-striped table-responsive"><tbody>
+	            	<tr>
+	            		<td>Version</td>
+	            		<td>{{ VERSION }}</td>
+	            	</tr>
+	            	<tr>
+	            		<td>User Registrations</td>
+	            		<td>{{ user_count }}</td>
+	            	</tr>	
+	            	<tr>
+	            		<td>Media Root</td>
+	            		<td>
+							 {{ media_root }}
+						</td>
+	            	</tr>
+	       	 
+ 	            	<tr>
+	            		<td>House</td>
+	            		<td>
+	            			{% if home_exist %}
+	            				{{ home_instance.name }}
+							{% else %}  
+								<a href="{% url 'PiApp.views.home_view' %}">add</a>
+							{% endif %}
+						</td>
+	            	</tr>	 
+	            	<tr>
+	            		<td>Active Device</td>
+	            		<td>
+	            			{% for item in DEVICE %}
+							    {{ item.name }}&nbsp
+							{% endfor %}
+						</td>
+	            	</tr>	
+	            	<tr>
+	            		<td>App Installed</td>
+	            		<td>
+	            			{% for item in applist %}
+							    {{ item.title }}&nbsp
+							{% endfor %}
+						</td>
+	            	</tr>   
+            	</tbody></table>               
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="box box-solid" >
+			<div class="box-header">
+				<i class="fa fa-star"></i>
+				<h3 class="box-title">Logging</h3>
+			</div>
+			<div class="box-body" id="log-box">
+				<pre>{{  pihome_log }}</pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
