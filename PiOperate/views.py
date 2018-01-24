@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Applist
+from .api import get_ip_address
 import os
 
 # Create your views here.
@@ -13,8 +14,7 @@ def download_views(request):
 
 def jupyter_views(request):
     PCILIST = Applist.objects.all()
-    import socket
-    ip = socket.gethostbyname(socket.gethostname())
+    ip = get_ip_address()
     return render(request, 'jupyter.html', locals())
 
 def process_view(request):
