@@ -6,7 +6,7 @@ import shutil
 import os
 from filemanager.filemanager import FileManager
 
-fm = FileManager('/Users/xdp/', False)
+fm = FileManager('/mnt/USB/', False)
 
 
 def index(request):
