@@ -4,6 +4,7 @@ import json
 import socket
 import fcntl
 import struct
+import platform
 
 def get_ip_address(ifname='eth0'):
   try:
@@ -21,9 +22,27 @@ def get_ip_address(ifname='eth0'):
 
 def kill_process_api(request):
     try:
-        pid = request.REQUEST['pid']
-        os.system("kill -9 " + pid)
+        pid = request.GET['pid']
+        os.system("kill 9 " + pid)
         ret = {'msg':'ok'}
     except:
         ret = {'msg':'fail'}
     return HttpResponse(json.dumps(ret))
+
+def get_release_info():
+    return platform.uname()
+
+def get_Filesystem_info():
+    result = []
+
+    a = os.popen('df -l').readlines()
+    for i in a:
+        result.append(i.split())
+
+    return result
+
+def get_cpu_temp():
+    file = open("/sys/class/thermal/thermal_zone0/temp")
+    temp = float(file.read()) / 1000
+    file.close()
+    return temp
