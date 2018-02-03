@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'file/', include('filemanager.urls')),
     url(r'^jupyter/',jupyter_views),
     url(r'process/', process_view),
-    url(r'dashboard/', dashboard_view,name='home'),
     url(r'kill_process', kill_process_api, name='kill_process'),
+    url(r'^dashboard/',dashboard_view),
     url(r'^$',download_views),
 ]

@@ -11,7 +11,7 @@ import plotly.offline as opy
 import plotly.graph_objs as go
 
 from .models import Applist
-from .api import get_ip_address, get_release_info, get_Filesystem_info, get_cpu_temp
+from .api import get_ip_address, get_release_info, get_Filesystem_info, get_cpu_temp, get_system_uptime
 
 
 
@@ -48,6 +48,7 @@ def process_view(request):
             a['memory'] = get[3]
             process_info.append(a)
     process_info.sort(key=lambda k:(k.get('cpu',0)))
+    process_info=process_info[1:]
     return render(request, 'process.html', locals())
 
 
@@ -56,5 +57,8 @@ def dashboard_view(request):
     pi_info = get_release_info()
     pi_system = get_Filesystem_info()
     pi_cpu_temp = get_cpu_temp()
-    return render(request, 'dashboard.html', locals())
+    uptime = get_system_uptime()
+    ip = get_ip_address()
+    return render(request, 'system_info.html', locals())
+
 

@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-nopub python3 ./manage.py runserver 0.0.0.0:8000
+python3 ./manage.py runserver 0.0.0.0:8000
+#jupyter-notebook --config=~/.jupyter/jupyter_notebook_config.py --allow-root

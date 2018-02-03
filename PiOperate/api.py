@@ -35,8 +35,8 @@ def get_release_info():
 def get_Filesystem_info():
     result = []
 
-    a = os.popen('df -l').readlines()
-    for i in a:
+    info = os.popen('df -l').readlines()
+    for i in info:
         result.append(i.split())
 
     return result
@@ -46,3 +46,8 @@ def get_cpu_temp():
     temp = float(file.read()) / 1000
     file.close()
     return temp
+
+def get_system_uptime():
+    time = os.popen('uptime').readlines()[0]
+    result = time[time.find('up') + 3:].split(',  ')
+    return result

@@ -24,8 +24,22 @@
    <div class="col-md-7 ">
 
     <div class="box box-solid box-success ">
-
-    </div><!-- /.box-body -->
+        <div class="box-header">
+            <i class="fa fa-desktop"></i>
+            <h3 class="box-title">System</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body  ">
+            <dl class="dl-left">
+                <dt  >Pi Name</dt>
+                <dd>{{ pi_info.node }}</dd>
+                <dt  >Kernel Version</dt>
+                <dd>{{ pi_info.release }}</dd>
+                <dt>IP</dt>
+                <dd>{{ ip }}</dd>
+                <dt>运行时间</dt>
+                <dd>{{ uptime.0 }} {{ uptime.1 }}</dd>
+            </dl>
+        </div><!-- /.box-body -->
         <div class="box-footer">
            <button type="button"  id="shutdown" class="btn btn-success">Shutdown</button>
            <button type="button"  id="reboot" class="btn btn-success btn-right">Reboot</button>
@@ -58,6 +72,10 @@
             {% endfor %}
         </table>
     </div>
+
+   <div>
+
+   </div>
 </div>
 
 </div>
