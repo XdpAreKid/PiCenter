@@ -1,5 +1,7 @@
 import os
 from django.http import HttpResponse
+import urllib.request, sys
+import re
 import json
 import socket
 import fcntl
@@ -35,19 +37,46 @@ def get_release_info():
 def get_Filesystem_info():
     result = []
 
-    info = os.popen('df -l').readlines()
+    info = os.popen('df -l').readlines()[1:]
     for i in info:
         result.append(i.split())
 
     return result
 
-def get_cpu_temp():
-    file = open("/sys/class/thermal/thermal_zone0/temp")
-    temp = float(file.read()) / 1000
-    file.close()
-    return temp
 
 def get_system_uptime():
     time = os.popen('uptime').readlines()[0]
     result = time[time.find('up') + 3:].split(',  ')
     return result
+
+
+def getCPUtemperature():
+    res = os.popen('vcgencmd measure_temp').readline()
+    return (res.replace("temp=", "").replace("'C\n", ""))
+
+
+# Return RAM information (unit=kb) in a list
+# Index 0: total RAM
+# Index 1: used RAM
+# Index 2: free RAM
+def getRAMinfo():
+    p = os.popen('free')
+    i = 0
+    while 1:
+        i = i + 1
+        line = p.readline()
+        if i == 2:
+            return (line.split()[1:4])
+
+
+# Return % of CPU used by user as a character string
+
+def getCPUuse():
+    info = os.popen('ps aux').readlines()
+    result = 0
+    for line in info[1:]:
+        get = line.split()
+        result += float(get[2])
+    return result
+
+

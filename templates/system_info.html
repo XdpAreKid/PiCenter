@@ -21,7 +21,7 @@
 
 {% block content %}
 <div class="row ">
-   <div class="col-md-7 ">
+   <div class="col-md-5 ">
 
     <div class="box box-solid box-success ">
         <div class="box-header">
@@ -36,7 +36,7 @@
                 <dd>{{ pi_info.release }}</dd>
                 <dt>IP</dt>
                 <dd>{{ ip }}</dd>
-                <dt>运行时间</dt>
+                <dt>Run Time</dt>
                 <dd>{{ uptime.0 }} {{ uptime.1 }}</dd>
             </dl>
         </div><!-- /.box-body -->
@@ -81,7 +81,8 @@
 </div>
 
 <div class="col-md-5 ">
-<canvas data-type="linear-gauge"
+<div>
+    <canvas data-type="linear-gauge"
     data-width="120"
     data-height="300"
     data-units="CPU °C"
@@ -105,6 +106,37 @@
     data-bar-begin-circle="false"
     data-value="{{ pi_cpu_temp }}"
 ></canvas>
+    <canvas data-type="radial-gauge"
+    data-width="300"
+    data-height="300"
+    data-units="CPU Use(%)"
+    data-min-value="0"
+        data-value="{{ cpu }}"
+    data-start-angle="0"
+    data-ticks-angle="180"
+    data-value-box="false"
+    data-max-value="100"
+    data-major-ticks="0,10,20,30,40,50,60,70,80,90,100"
+    data-minor-ticks="2"
+    data-stroke-ticks="true"
+    data-highlights='[
+        {"from": 80, "to": 100, "color": "rgba(200, 50, 50, .75)"}
+    ]'
+    data-color-plate="#fff"
+    data-border-shadow-width="0"
+    data-borders="false"
+    data-needle-type="arrow"
+    data-needle-width="2"
+    data-needle-circle-size="7"
+    data-needle-circle-outer="true"
+    data-needle-circle-inner="false"
+    data-animation-duration="1500"
+    data-animation-rule="linear"
+></canvas>
+</div>
+<div>
+<iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=2&num=4" width="550" height="70" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+</div>
 
 </div>
 

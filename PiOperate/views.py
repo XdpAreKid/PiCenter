@@ -11,7 +11,8 @@ import plotly.offline as opy
 import plotly.graph_objs as go
 
 from .models import Applist
-from .api import get_ip_address, get_release_info, get_Filesystem_info, get_cpu_temp, get_system_uptime
+from .api import get_ip_address, get_release_info, get_Filesystem_info, \
+    getCPUtemperature, get_system_uptime, getCPUuse, getRAMinfo
 
 
 
@@ -56,9 +57,14 @@ def dashboard_view(request):
     PCILIST = Applist.objects.all()
     pi_info = get_release_info()
     pi_system = get_Filesystem_info()
-    pi_cpu_temp = get_cpu_temp()
+    pi_cpu_temp = getCPUtemperature()
     uptime = get_system_uptime()
     ip = get_ip_address()
+    cpu = getCPUuse()
+    RAM_stats = getRAMinfo()
+    RAM_total = round(int(RAM_stats[0]) / 1000, 1)
+    RAM_used = round(int(RAM_stats[1]) / 1000, 1)
+    RAM_free = round(int(RAM_stats[2]) / 1000, 1)
     return render(request, 'system_info.html', locals())
 
 

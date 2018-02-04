@@ -87,12 +87,7 @@
 .box-frame {
     margin: 0px;
 }
-.errorlist>li {
-    color: #001f3f;
-    margin-left: -25px;
-    margin-top: 10px;
-    padding: -left:0px;
-}
+
 .django-form > input {
     display: block;
     width: 100%;
