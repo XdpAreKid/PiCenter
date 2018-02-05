@@ -4,11 +4,7 @@ import math
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
-from pyecharts import Line3D
-from pyecharts.constants import DEFAULT_HOST
 from django.views.generic.base import TemplateView
-import plotly.offline as opy
-import plotly.graph_objs as go
 
 from .models import Applist
 from .api import get_ip_address, get_release_info, get_Filesystem_info, \
